@@ -1,2 +1,2 @@
 ## DEMO for Springboot Framework
-This is repo containing Spring Framework
+This is repo containing Sprintboot project
