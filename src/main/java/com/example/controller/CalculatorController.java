@@ -11,6 +11,11 @@ public class CalculatorController {
         return a + b;
     }
 
+    @PostMapping("/add-post")
+    public int addPost(@RequestParam int a, @RequestParam int b) {
+        return a + b;
+    }
+
     @GetMapping("/sub")
     public int subtract(@RequestParam int a, @RequestParam int b) {
         return a - b;
