@@ -13,7 +13,7 @@ public class CalculatorController {
 
     @PostMapping("/add-post")
     public int addPost(@RequestParam int a, @RequestParam int b) {
-        System.out.println("Running addPost() " + a + " + " + b);
+           System.out.println("Running addPost() " + a + " + " + b);
         return a + b;
     }
 
