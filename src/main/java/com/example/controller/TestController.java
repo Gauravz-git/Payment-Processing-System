@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
 @RestController
 @RequestMapping("/test")
 public class TestController {
@@ -19,7 +17,7 @@ public class TestController {
             @PathVariable String pv1,
             @PathVariable String pv2,
             @PathVariable String pv3) {
-                
+
             System.out.println("Running myMethod()" + param1 + " " + param2);
                 return "Hello World - post" + param1 + " " + param2;
         }
