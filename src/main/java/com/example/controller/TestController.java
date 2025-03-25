@@ -29,11 +29,22 @@ public class TestController {
 
             System.out.println("Running myMethodMPost()" + param1 + " + " + param2 + " + " + pv1 + " + " + pv2 + " + " + pv3 + " + " + requestBody);
             
-            MyNum reqAsObj = convertJsonToMyNum(requestBody);
-            System.out.println("reqAsObj:" + reqAsObj);
+            MyNum reqAsObjViaJackson = convertJsonToMyNum(requestBody);
+            System.out.println("reqAsObj: " + reqAsObjViaJackson);
 
-            return "Hello World-post|param1:" + param1 + "|param2:" + param2 + "|pv1:" + pv1 + "|pv2:" + pv2 + "|pv3:" + pv3 + "\n|requestBody:\n" + requestBody + "\n|reqAsObj:" + reqAsObj;   
+            MyNum reqAsObjViaGson = convertJsonToMyNumUsingGson(requestBody);
+            System.out.println("reqAsObjViaGson:" + reqAsObjViaGson);
+
+
+
+            return "Hello World-post|param1:" + param1 + "|param2:" + param2 
+            + "|pv1:" + pv1 + "|pv2:" + pv2 + "|pv3:" + pv3 
+            + "\n|requestBody:\n" + requestBody 
+            + "\n|reqAsObjViaJackson:\n" + reqAsObjViaJackson 
+            + "\n|reqAsObjViaGson:\n" + reqAsObjViaGson;
             
+            MyNum reqAsObjViaJacksonViaGson =convertJsonToMyNumUsingGson(requestBody);
+            System.out.println("reqAsObjViaJacksonViaGson:" + reqAsObjViaJacksonViaGson);
 
             
                 
@@ -46,7 +57,7 @@ public class TestController {
         }
         
         
-        // Method to convert JSON string to MyNum object
+    // Method to convert JSON string to MyNum object
     public static MyNum convertJsonToMyNumUsingGson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, MyNum.class); 
