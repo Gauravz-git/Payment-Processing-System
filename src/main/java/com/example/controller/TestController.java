@@ -1,11 +1,13 @@
 package com.example.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.example.ademo.pojo.MyNum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 @RestController
+@ResponseBody
 @RequestMapping("/test")
 public class TestController {
 
@@ -16,29 +18,27 @@ public class TestController {
             @PathVariable String pv1,
             @PathVariable String pv2,
             @PathVariable String pv3,
-            @RequestBody String requestBody) {
+            @RequestBody myNum requestBody) {
 
         System.out.println("Running myMethodMPost(): " + param1 + " + " + param2 + " + " + pv1 + " + " + pv2 + " + " + pv3 + " + " + requestBody);
 
-        // Convert JSON using Jackson
+        /*  // Convert JSON using Jackson
         MyNum reqAsObjViaJackson = convertJsonToMyNum(requestBody);
         System.out.println("reqAsObj: " + reqAsObjViaJackson);
 
         // Convert JSON using Gson
         MyNum reqAsObjViaGson = convertJsonToMyNumUsingGson(requestBody);
         System.out.println("reqAsObjViaGson: " + reqAsObjViaGson);
-
+        */       
         return "Hello World-post|param1:" + param1 + "|param2:" + param2
                 + "|pv1:" + pv1 + "|pv2:" + pv2 + "|pv3:" + pv3
-                + "\n|requestBody:\n" + requestBody
-                + "\n|reqAsObjViaJackson:\n" + reqAsObjViaJackson
-                + "\n|reqAsObjViaGson:\n" + reqAsObjViaGson;
+                + "\n|requestBody:\n" + requestBody;
     }
 
     @GetMapping("/myMethod2")
     public String myMethod2() {
         System.out.println("Running myMethod()");
-        return "Hello World2";
+        return "Hello World2 - response value";
     }
 
     // Convert JSON string to MyNum object using Jackson
