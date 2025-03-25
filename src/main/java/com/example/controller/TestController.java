@@ -1,65 +1,60 @@
 package com.example.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import com.example.ademo.pojo.MyNum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @RestController
 @RequestMapping("/test")
 public class TestController {
 
-        @PostMapping("/myMethod-post/{pv1}/{pv2}/{pv3}")
-        public String myMethodpost(
-            @RequestParam(required = false) String param1, 
+    @PostMapping("/myMethod-post/{pv1}/{pv2}/{pv3}")
+    public String myMethodpost(
+            @RequestParam(required = false) String param1,
             @RequestParam(required = false) String param2,
             @PathVariable String pv1,
             @PathVariable String pv2,
             @PathVariable String pv3,
             @RequestBody String requestBody) {
 
-            System.out.println("Running myMethodMPost()" + param1 + " + " + param2 + " + " + pv1 + " + " + pv2 + " + " + pv3 + " + " + requestBody);
-            
-            MyNum reqAsObjViaJackson = convertJsonToMyNum(requestBody);
-            System.out.println("reqAsObj: " + reqAsObjViaJackson);
+        System.out.println("Running myMethodMPost(): " + param1 + " + " + param2 + " + " + pv1 + " + " + pv2 + " + " + pv3 + " + " + requestBody);
 
-            MyNum reqAsObjViaGson = convertJsonToMyNumUsingGson(requestBody);
-            System.out.println("reqAsObjViaGson:" + reqAsObjViaGson);
+        // Convert JSON using Jackson
+        MyNum reqAsObjViaJackson = convertJsonToMyNum(requestBody);
+        System.out.println("reqAsObj: " + reqAsObjViaJackson);
 
+        // Convert JSON using Gson
+        MyNum reqAsObjViaGson = convertJsonToMyNumUsingGson(requestBody);
+        System.out.println("reqAsObjViaGson: " + reqAsObjViaGson);
 
+        return "Hello World-post|param1:" + param1 + "|param2:" + param2
+                + "|pv1:" + pv1 + "|pv2:" + pv2 + "|pv3:" + pv3
+                + "\n|requestBody:\n" + requestBody
+                + "\n|reqAsObjViaJackson:\n" + reqAsObjViaJackson
+                + "\n|reqAsObjViaGson:\n" + reqAsObjViaGson;
+    }
 
-            return "Hello World-post|param1:" + param1 + "|param2:" + param2 
-            + "|pv1:" + pv1 + "|pv2:" + pv2 + "|pv3:" + pv3 
-            + "\n|requestBody:\n" + requestBody 
-            + "\n|reqAsObjViaJackson:\n" + reqAsObjViaJackson 
-            + "\n|reqAsObjViaGson:\n" + reqAsObjViaGson;
-            
-            MyNum reqAsObjViaJacksonViaGson =convertJsonToMyNumUsingGson(requestBody);
-            System.out.println("reqAsObjViaJacksonViaGson:" + reqAsObjViaJacksonViaGson);
+    @GetMapping("/myMethod2")
+    public String myMethod2() {
+        System.out.println("Running myMethod()");
+        return "Hello World2";
+    }
 
-            
-                
+    // Convert JSON string to MyNum object using Jackson
+    public static MyNum convertJsonToMyNum(String json) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(json, MyNum.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
+    }
 
-        @GetMapping("/myMethod2")
-        public String myMethod2() {
-            System.out.println("Running myMethod()");
-                return "Hello World2";
-        }
-        
-        
-    // Method to convert JSON string to MyNum object
+    // Convert JSON string to MyNum object using Gson
     public static MyNum convertJsonToMyNumUsingGson(String json) {
         Gson gson = new Gson();
-        return gson.fromJson(json, MyNum.class); 
+        return gson.fromJson(json, MyNum.class);
     }
 }

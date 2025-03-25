@@ -1,5 +1,7 @@
 package com.example.ademo.pojo;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class MyNum {
     private int num1;
     private int num2;
@@ -35,6 +37,17 @@ public class MyNum {
                 "num1=" + num1 +
                 ", num2=" + num2 +
                 '}';
+    }
+
+     // Method to convert JSON string to MyNum object
+    public static MyNum convertJsonToMyNum(String jsonString) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(jsonString, MyNum.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // Return null if parsing fails
+        }
     }
 
     public static void main(String[] args) {
