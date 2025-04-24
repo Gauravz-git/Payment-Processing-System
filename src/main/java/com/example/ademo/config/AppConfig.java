@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 	
 	@Bean
-	public Random random() {
+	public Random random() { 
 		Random randomObj = new Random();
-		System.out.println("AppConfig || random() invoked!!");
+		System.out.println("AppConfig ||random() invoked||hashCode:" + randomObj.hashCode());
 		return randomObj;
 	}
 
