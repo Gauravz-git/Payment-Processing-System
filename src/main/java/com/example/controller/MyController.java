@@ -1,7 +1,9 @@
 package com.example.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ademo.pojo.MyNum;
 import com.example.ademo.service.interfaces.IMyService;
@@ -12,7 +14,6 @@ public class MyController {
 
     private final IMyService myService;
 
-    @Autowired
     public MyController(IMyService myService) {
         System.out.println("MyController || Constructor Invoked!!");
         this.myService = myService;
